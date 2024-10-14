@@ -1,4 +1,5 @@
 ﻿using ServiceContracts.Proxies;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace UserManagment.Tests.Unit
         private readonly IApiProxy _apiService;
         public ApiServiceTests()
         {
+            _apiService=new ApiProxy();
         }
         [Fact]
         public void GetUsersDataAsync_ShouldThrowException_WhenUrlIsNull()
@@ -23,7 +25,7 @@ namespace UserManagment.Tests.Unit
             var response = () => _apiService.GetUsersDataAsync(url);
 
             //Assert
-            Assert.Throws<ArgumentNullException>(response);
+            Assert.ThrowsAsync<ArgumentNullException>(response);
         }
 
         [Fact]
@@ -36,7 +38,7 @@ namespace UserManagment.Tests.Unit
             var response = () => _apiService.GetUsersDataAsync(url);
 
             //Assert
-            Assert.Throws<ArgumentException>(response);
+            Assert.ThrowsAsync<ArgumentException>(response);
         }
 
         [Fact]
@@ -49,7 +51,7 @@ namespace UserManagment.Tests.Unit
             var response =_apiService.GetUsersDataAsync(url);
 
             //Assert
-            Assert.Empty(response);
+            Assert.Empty(response.Result);
         }
 
         [Fact]
@@ -62,7 +64,7 @@ namespace UserManagment.Tests.Unit
             var response = _apiService.GetUsersDataAsync(url);
 
             //Assert
-            Assert.NotEmpty(response);
+            Assert.NotEmpty(response.Result);
         }
     }
 }

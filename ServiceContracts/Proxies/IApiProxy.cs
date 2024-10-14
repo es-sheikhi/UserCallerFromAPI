@@ -6,6 +6,6 @@ namespace ServiceContracts.Proxies
 {
     public interface IApiProxy
     {
-        List<UserDto> GetUsersDataAsync(string url);
+        Task<List<UserDto>> GetUsersDataAsync(string url);
     }
 }
