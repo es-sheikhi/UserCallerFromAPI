@@ -1,4 +1,5 @@
-﻿using ServiceContracts.DTOs;
+﻿using Repositories.Interfaces;
+using ServiceContracts.DTOs;
 using ServiceContracts.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace Services
 {
     public class UsersService : IUsersService
     {
+        private readonly IUserRepository _userRepository;
         public UserDto AddUser(UserDto user)
         {
             throw new NotImplementedException();
