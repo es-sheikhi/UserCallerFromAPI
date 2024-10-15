@@ -1,4 +1,6 @@
-﻿using Repositories.Interfaces;
+﻿using Entities;
+using Repositories.Implementations;
+using Repositories.Interfaces;
 using ServiceContracts.DTOs;
 using ServiceContracts.Interfaces;
 using System;
@@ -12,9 +14,23 @@ namespace Services
     public class UsersService : IUsersService
     {
         private readonly IUserRepository _userRepository;
-        public UserDto AddUser(UserDto user)
+        public UsersService()
         {
-            throw new NotImplementedException();
+            _userRepository = new UserRepository();
+        }
+        public UserDto AddUser(UserDto userDto)
+        {
+            if(userDto == null)
+                throw new ArgumentNullException(nameof(userDto));
+
+            if (userDto.FirstName == null || userDto.Email==null)
+                throw new ArgumentException();
+
+            if (userDto.Id <= 0)
+                throw new ArgumentException(nameof(userDto.Id));
+
+            _userRepository.AddUser(userDto);
+            return userDto;
         }
 
         public bool DeleteUser(int id)

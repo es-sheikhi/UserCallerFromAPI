@@ -1,4 +1,5 @@
-﻿using ServiceContracts.DTOs;
+﻿using Entities;
+using ServiceContracts.DTOs;
 using ServiceContracts.Interfaces;
 using Services;
 using System;
@@ -32,16 +33,37 @@ namespace UserManagment.Tests.Unit
         }
 
         [Fact]
+        public void AddUser_ShouldThrowException_WhenUserIdIsNotValid()
+        {
+            //Arrange
+            UserDto userDto = new()
+            {
+                Id = 0,
+                FirstName = "test",
+                Email = "test@test.com",
+                Avatar = "test"
+            };
+
+            //Act
+            var response = () => _usersService.AddUser(userDto);
+
+            //Assert
+            Assert.Throws<ArgumentException>(response);
+        }
+
+        [Fact]
         public void AddUser_ShouldThrowException_WhenUserFirstNameOrEmailIsNull()
         {
             //Arrange
             UserDto userDto1 = new()
             {
+                Id = 1,
                 Email = "test@test.com",
                 Avatar = "test"
             };
             UserDto userDto2 = new()
             {
+                Id = 1,
                 FirstName = "test",
                 Avatar = "test"
             };
@@ -61,7 +83,8 @@ namespace UserManagment.Tests.Unit
             //Arrange
             UserDto userDto = new()
             {
-                FirstName="test",
+                Id = (new Random()).Next(),
+                FirstName = "test",
                 Email = "test@test.com",
                 Avatar = "test"
             };
@@ -71,6 +94,28 @@ namespace UserManagment.Tests.Unit
 
             //Assert
             Assert.NotNull(response);
+        }
+        #endregion
+
+        #region DeleteUser
+        [Fact]
+        public void DeleteUser_ShouldReturnFalse_WhenIdIsNotFound()
+        {
+            //Arrange
+            int id = -1;
+
+            //Act
+
+            //Assert
+        }
+        [Fact]
+        public void DeleteUser_ShouldReturnTrue_WhenIdIsFound()
+        {
+            //Arrange
+
+            //Act
+
+            //Assert
         }
         #endregion
     }

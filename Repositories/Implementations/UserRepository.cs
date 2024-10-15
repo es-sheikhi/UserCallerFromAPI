@@ -13,9 +13,9 @@ namespace Repositories.Implementations
     public class UserRepository : IUserRepository
     {
         private readonly UserDbContext _context;
-        public UserRepository(UserDbContext context)
+        public UserRepository()
         {
-            _context = context;
+            _context = new UserDbContext();
         }
         public UserDto AddUser(UserDto userDto)
         {

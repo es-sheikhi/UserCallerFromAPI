@@ -12,7 +12,7 @@ namespace Repositories.Interfaces
     {
         List<UserDto> GetAllUsersAsync();
         UserDto GetUserById(int id);
-        UserDto AddUser(UserDto user);
+        UserDto AddUser(UserDto userDto);
         bool DeleteUser(int id);
     }
 }
