@@ -31,6 +31,7 @@ namespace ServiceContracts.Extensions
                 Email = userDto.Email,
                 FirstName = userDto.FirstName,
                 LastName = userDto.LastName,
+                UserId = userDto.Id
             };
         }
         public static UserDto ToUserDto(this User user)

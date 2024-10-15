@@ -37,7 +37,7 @@ namespace Repositories.Implementations
             return false;
         }
 
-        public List<UserDto> GetAllUsersAsync()
+        public List<UserDto> GetAllUsers()
         {
             var userList = _context.Users.Select(c => c.ToUserDto());
             return userList.ToList();

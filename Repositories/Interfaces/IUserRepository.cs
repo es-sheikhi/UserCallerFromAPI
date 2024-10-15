@@ -10,7 +10,7 @@ namespace Repositories.Interfaces
 {
     public interface IUserRepository
     {
-        List<UserDto> GetAllUsersAsync();
+        List<UserDto> GetAllUsers();
         UserDto GetUserById(int id);
         UserDto AddUser(UserDto userDto);
         bool DeleteUser(int id);

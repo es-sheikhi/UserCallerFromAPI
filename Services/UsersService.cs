@@ -35,17 +35,17 @@ namespace Services
 
         public bool DeleteUser(int id)
         {
-            throw new NotImplementedException();
+            return _userRepository.DeleteUser(id);
         }
 
         public List<UserDto> GetAllUsers()
         {
-            throw new NotImplementedException();
+            return _userRepository.GetAllUsers();
         }
 
         public UserDto GetUserById(int id)
         {
-            throw new NotImplementedException();
+            return _userRepository.GetUserById(id);
         }
     }
 }

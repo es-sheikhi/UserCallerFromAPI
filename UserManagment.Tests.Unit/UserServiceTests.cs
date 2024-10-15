@@ -105,18 +105,100 @@ namespace UserManagment.Tests.Unit
             int id = -1;
 
             //Act
+            var response = _usersService.DeleteUser(id);
 
             //Assert
+            Assert.False(response);
         }
         [Fact]
         public void DeleteUser_ShouldReturnTrue_WhenIdIsFound()
         {
             //Arrange
+            UserDto userDto = new()
+            {
+                Id = (new Random()).Next(),
+                FirstName = "test",
+                Email = "test@test.com",
+                Avatar = "test"
+            };
 
             //Act
+            _usersService.AddUser(userDto);
+            var response = _usersService.DeleteUser(userDto.Id);
 
             //Assert
+            Assert.True(response);
         }
+        #endregion
+
+        #region GetAllUsers
+        [Fact]
+        public void GetAllPersons_ShouldBeEmpty_WhenNothingIsAdded()
+        {
+            //Arrange
+
+            //Act
+            var userList = _usersService.GetAllUsers();
+
+            //Assert
+            Assert.Empty(userList);
+        }
+
+        [Fact]
+        public void GetAllPersons_ShouldNotBeNull_WhenSomethingIsAdded()
+        {
+            //Arrange
+            UserDto userDto = new()
+            {
+                Id = (new Random()).Next(),
+                FirstName = "test",
+                Email = "test@test.com",
+                Avatar = "test"
+            };
+
+            //Act
+            var response = _usersService.AddUser(userDto);
+            var userList = _usersService.GetAllUsers();
+
+            //Assert
+            Assert.NotEmpty(userList);
+        }
+        #endregion
+
+        #region GetPersonByPersonId
+        [Fact]
+        public void GetUserByUserId_ShouldReturnNull_WhenUserIdIsNotValid()
+        {
+            //Arrange
+            int id = 0;
+
+            //Act
+            var response = _usersService.GetUserById(id);
+
+            //Assert
+            Assert.Null(response);
+        }
+
+        [Fact]
+        public void GetUserByUserId_ShouldReturnProperUser_WhenUserIdIsValid()
+        {
+            //Arrange
+            UserDto userDto = new()
+            {
+                Id = (new Random()).Next(),
+                FirstName = "test",
+                Email = "test@test.com",
+                Avatar = "test"
+            };
+
+            //act
+            _usersService.AddUser(userDto);
+            var response = _usersService.GetUserById(userDto.Id);
+
+            //Assert
+            Assert.NotNull(response);
+        }
+
         #endregion
     }
 }
